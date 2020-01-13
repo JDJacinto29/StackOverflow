@@ -153,22 +153,22 @@ def runGUI():
 def write_LAN():
 
     setIP("LAN")
-    root.destroy()
+    exit()
 
 def write_Wireless():
     
     setIP("Wireless")
-    root.destroy()
+    exit()
 
 def write_ResetLAN():
     
     setIP("ResetLAN")
-    root.destroy()
+    exit()
 
 def write_ResetWireless():
     
     setIP("ResetWireless")
-    root.destroy()
+    exit()
 
 def write_Status():
     
