@@ -212,8 +212,7 @@ def addCustomSiteID():
         tkvar.set(newID)
 
         #Fill the text entries with default addresses
-        # updateIP.set(defaultIP)
-        e1.configure(text = defaultIP)
+        updateIP.set(defaultIP)
         updateSM.set(defaultSM)
 
 def changeSiteID(n,m,x):
