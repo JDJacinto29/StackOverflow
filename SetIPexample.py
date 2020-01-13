@@ -53,8 +53,8 @@ def openINIFile():
             configFile = file
 
     # if not found, prompt user
-    if configFile == None:
-        configFile = filedialog.askopenfilename(initialdir = currentDirectory, title = "Config File Not Found, Please Locate Manually")
+    # if configFile == None:
+    #     configFile = filedialog.askopenfilename(initialdir = currentDirectory, title = "Config File Not Found, Please Locate Manually")
 
     return configFile
 
@@ -109,7 +109,7 @@ def runGUI():
 
     # IP Address entry field
     Tkinter.Label(frame, text="IP Address:",bg="black",fg="white").place(x = 38, y = 30)
-    updateIP = StringVar()
+    updateIP = Tkinter.StringVar(root)
     updateIP.trace("w", lambda index, mode, sv=updateIP: updateIPAdress())
     e1 = Tkinter.Entry(frame,textvariable=updateIP)
     e1.insert(0,config.get(config.get('Parameters','lastused'),'targetip'))
@@ -117,7 +117,7 @@ def runGUI():
 
     # Subtnet Mask entry field
     Tkinter.Label(frame, text="Subnet Mask:",bg="black",fg="white").place(x = 25, y = 55)
-    updateSM = StringVar()
+    updateSM = Tkinter.StringVar(root)
     updateSM.trace("w", lambda name, index, mode, sv=updateSM: updateSubnetMask())
     e2 = Tkinter.Entry(frame,textvariable=updateSM)
     e2.insert(0,config.get(config.get('Parameters','lastused'),'targetsubnet'))
@@ -263,11 +263,11 @@ if __name__ == '__main__':
     # get the current directory
     currentDirectory = os.getcwd()
 
+    # Generate Tkinter root
+    root = Tkinter.Tk()
+
     # parse the config
     configFile = openINIFile()
     config,Parameters = readConfig(configFile)
-
-    # Generate button GUI
-    root = Tkinter.Tk()
 
     runGUI()
