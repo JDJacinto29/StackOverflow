@@ -119,7 +119,7 @@ def runGUI():
     # Subtnet Mask entry field
     Tkinter.Label(frame, text="Subnet Mask:",bg="black",fg="white").place(x = 25, y = 55)
     updateSM = Tkinter.StringVar(root)
-    updateSM.trace("w", lambda name, index, mode, sv=updateSM: updateSubnetMask())
+    # updateSM.trace("w", lambda name, index, mode, sv=updateSM: updateSubnetMask())
     e2 = Tkinter.Entry(frame,textvariable=updateSM)
     e2.insert(0,config.get(config.get('Parameters','lastused'),'targetsubnet'))
     e2.place(x = 110, y = 56)
