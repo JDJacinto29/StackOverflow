@@ -101,16 +101,17 @@ def runGUI():
     tkvar = Tkinter.StringVar(root)
     tkvar.set(config.get("Parameters",'lastused')) # set the default option
 
-    popupMenu = Tkinter.OptionMenu(frame, tkvar, *SiteIDs)
+    # popupMenu = Tkinter.OptionMenu(frame, tkvar, *SiteIDs)
+    popupMenu = Tkinter.OptionMenu(frame, tkvar, *SiteIDs, command=changeSiteID)
     Tkinter.Label(frame, text="Site ID:",bg="black",fg="white").place(x = 61, y = 4)
     popupMenu.place(x = 110, y = 4,height=21,width=124)
     # link function to change dropdown
-    tkvar.trace('w', changeSiteID)
+    # tkvar.trace('w', changeSiteID)
 
     # IP Address entry field
     Tkinter.Label(frame, text="IP Address:",bg="black",fg="white").place(x = 38, y = 30)
     updateIP = Tkinter.StringVar(root)
-    updateIP.trace("w", lambda index, mode, sv=updateIP: updateIPAdress())
+    # updateIP.trace("w", lambda index, mode, sv=updateIP: updateIPAdress())
     e1 = Tkinter.Entry(frame,textvariable=updateIP)
     e1.insert(0,config.get(config.get('Parameters','lastused'),'targetip'))
     e1.place(x = 110, y = 31)
@@ -215,19 +216,19 @@ def addCustomSiteID():
         updateIP.set(defaultIP)
         updateSM.set(defaultSM)
 
-def changeSiteID(n,m,x):
+def changeSiteID(option):
     
-    if tkvar.get() == "Add Custom...":
+    if option == "Add Custom...":
 
         addCustomSiteID()
 
     else:
         # Replace the text in the IP Address entry box
-        updateIP.set(config.get(tkvar.get(),'targetip'))
-        updateSM.set(config.get(tkvar.get(),'targetsubnet'))
+        updateIP.set(config.get(option,'targetip'))
+        updateSM.set(config.get(option,'targetsubnet'))
 
     # Update the last used variable
-    lastUsed = tkvar.get()
+    lastUsed = option
     # resetLastUsedVariable(lastUsed)
 
 def updateIPAdress():
