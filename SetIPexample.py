@@ -72,6 +72,25 @@ def readConfig(configFile):
 
     return config,Parameters
 
+def write_config():
+
+    # save to config file
+    with open(configFile, 'w') as fh:
+
+        config.write(fh)
+
+class UpdateIP(StringVar):
+
+    def set(self, ip):
+
+        print('UpdateIP.set({})'.format(ip))
+        
+        # update IP Address
+        config[tkvar.get()]['TargetIP'] = ip
+        write_config()
+
+        super().set(ip)
+
 def runGUI():
 
     # set global variables
@@ -110,7 +129,7 @@ def runGUI():
 
     # IP Address entry field
     Tkinter.Label(frame, text="IP Address:",bg="black",fg="white").place(x = 38, y = 30)
-    updateIP = Tkinter.StringVar(root)
+    updateIP = UpdateIP(root) 
     # updateIP.trace("w", lambda index, mode, sv=updateIP: updateIPAdress())
     e1 = Tkinter.Entry(frame,textvariable=updateIP)
     e1.insert(0,config.get(config.get('Parameters','lastused'),'targetip'))
@@ -231,7 +250,7 @@ def changeSiteID(option):
     lastUsed = option
     # resetLastUsedVariable(lastUsed)
 
-def updateIPAdress():
+# def updateIPAdress():
 
     # update IP Address
     config[tkvar.get()]['TargetIP'] = updateIP.get()
